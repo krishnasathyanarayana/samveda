@@ -1,9 +1,411 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Samveda</title>
-    </head>
-    <body>
-        <p>Under construction.</p>
-    </body>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Chandana Samveda Youtube classes
+    </title>
+
+
+
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/drive-db"></script>
+
+
+<body>
+
+    <div style="background-color:DarkOrchid;color:white;padding:20px;">
+        <h2>Samveda </h2>
+         <p>This website provides easy access to all samveda classes aired on DD Chandana. Teachers and students can make use of  it to prepare for exams. 
+         The website is under construction.
+         </p>
+
+    </div>
+
+
+     <div style="background-color:HoneyDew;color:red;padding:20px;">
+   
+     <p> Interested in teaching students or want to help build tools? Submit your request @  <a href="  https://forms.gle/R3QxVgNzfmQQSRUH7" target="_blank" > Feedback </a>
+     </p>
+
+     </div>
+
+
+    </br>
+    </br>
+
+    <form>
+
+        <label for="html">Medium</label>
+
+
+        <select id="medium" name = "medium"  onchange="selectMedium();" >
+            <option value = "Choose" selected >Choose</option>
+            <option value = "Kannada">Kannada</option>
+            <!-- <option value = "English" >English</option> -->
+        </select>
+
+        <label for="Class">Class</label>
+
+
+        <select id="class" name = "Class" onchange="selectClass();">
+            <option value = "Choose" selected >Choose</option>
+            <option value = "10">10th</option>
+
+        </select>
+
+        <label for="Subject">Subject</label>
+
+
+        <select id="subject" name = "Subject" onchange="selectSubject();">
+            <option value = "Choose" selected>Choose</option>
+
+            <option value = "Social Science" >Social Science</option>
+
+            <!--  
+
+            <option value = "Maths">Maths</option>
+            <option value = "Science">Science</option>
+            <option value = "Kannada">Kannada</option>
+            <option value = "English">English</option>
+            <option value = "Sanskrit">Sanskrit</option>
+            -->
+        </select>
+
+
+    </form>
+
+    </br>
+    </br>
+
+    <table id="switch-hitters" class="table table-condensed table-striped"></table>
+
+    <table id="drive-db"> </table>
+
+
+    <script>
+        $(document).ready(function () {
+        $('select').each(function () {
+            var select = $(this);
+            var selectedValue = select.find('option[selected]').val();
+
+            if (selectedValue) {
+            select.val(selectedValue);
+            } else {
+            select.prop('selectedIndex', 0);
+            }
+        });
+        });
+
+        var selectedMedium = selectMedium();
+        var selectedClass = selectClass();
+        var selectedSubject = selectSubject();
+
+        var sheetGidMapping  = {
+
+            "English":  {
+                                    "5" : {
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+
+                                    "6": {
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+                                    "7": {
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+                                    "8" :{
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+                                    "9":{
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+
+                                    },
+                                    "10":{
+
+                                        "Maths": {
+                                        "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                        "tab":"9"
+                                        },
+
+                                        "Science": {
+                                        "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                        "tab":"10"
+                                        },
+                                        "Kannada": {
+                                        "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                        "tab":"11"
+                                        },
+                                        "English": {
+                                        "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                        "tab":"12"
+                                        },
+                                        "Social Science": {
+                                        "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                        "tab":"8"
+                                        },
+                                        "Sanskrit": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"6"
+                                        }
+
+                                    }
+
+                              },
+            "Kannada": {
+                                "5" : {
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+
+                                    "6": {
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+                                    "7": {
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+                                    "8" :{
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+                                    },
+                                    "9":{
+                                        "sheet":"1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw",
+                                        "tab":""
+
+
+                                    },
+                                    "10":{
+                                        "Social Science": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"1"},
+                                        "Science": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"2"
+                                        },
+                                        "Maths": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"3"},
+                                        "Kannada": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"4"
+                                        },
+                                        "English": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"5"},
+                                        "Sanskrit": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"6"
+                                        },
+                                        "Hindi": {
+                                            "sheet":'1t6xbmlmyPajMzuZ1grEA4JSPz-p-Cv8N8KeX8jh4xsw',
+                                            "tab":"7"
+                                        }                                        
+                                    }                                        
+                                    
+
+            }                  
+
+        };   
+
+
+
+
+    function selectMedium(){
+        var e = document.getElementById("medium");
+        selectedMedium = e.value;
+        loadDataDBDrive();
+
+    }
+
+    function selectClass(){
+        var e = document.getElementById("class");
+        selectedClass = e.value;
+        loadDataDBDrive();
+    }
+
+    function selectSubject(){
+        var e = document.getElementById("subject");
+        selectedSubject = e.value;
+        loadDataDBDrive();
+    }
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+
+    function isValidHttpUrl(string) {
+        let url;
+        
+        try {
+            url = new URL(string);
+        } catch (_) {
+            return false;  
+        }
+
+        return url.protocol === "http:" || url.protocol === "https:";
+}
+
+
+    function areAllOptionsSelected() {
+
+        if (selectedMedium == null ||  selectedClass == null || selectedSubject == null) {
+            return false;
+        }
+        if (selectedMedium  == "Choose" ||  selectedClass == "Choose" || selectedSubject == "CHoose") {
+            console.log("Incomplete selection. Not doing anything.");
+            return false;
+        }
+
+        return true;
+    }
+
+    function getSelectionMapping() {
+        var selection = sheetGidMapping[selectedMedium] [selectedClass] [selectedSubject];
+        return selection;
+    }
+
+
+    async function loadDataDBDrive(){
+
+        var Parent = document.getElementById('drive-db');
+        while(Parent.hasChildNodes())
+        {
+            Parent.removeChild(Parent.firstChild);
+        }
+        
+        if (areAllOptionsSelected() != true) {
+            console.log("Ignoring as no options are selected.");
+            return;
+        }
+
+        selectionData = getSelectionMapping();
+
+        let data = await drive( selectionData);
+
+        let datatable = document.querySelector('#drive-db');
+        if  (data.length) {
+
+            let columns = Object.getOwnPropertyNames(data[0]);
+
+            let columnsWithoutParts = new Set();
+
+            columns.forEach(col => {
+                if (col.startsWith('part')) {
+                    columnsWithoutParts.add("YouTube Links");
+                }else {
+                    columnsWithoutParts.add(col);
+                }
+            });
+
+            columnsWithoutParts.forEach(col => {
+                let th = document.createElement('th');
+                th.innerText = capitalizeFirstLetter(col);
+                datatable.appendChild(th);
+            });
+
+
+
+
+            data.forEach( row =>  {
+                let tr = document.createElement('tr');
+                let allPartsLinks = new Set(); 
+                columns.forEach (col => {
+
+                    let td = document.createElement('td');
+
+                    cellData =  row[col];
+
+                    if (col.startsWith('part')) { 
+                        if (cellData) {
+                            allPartsLinks.add(cellData);
+                        }
+
+                    }
+                    else {
+                            td.innerText =cellData;
+                            tr.appendChild(td);
+
+                    }
+                    
+                });
+
+                //Add all the links
+                let linksTd = document.createElement('td');
+                let allLinksText = '';
+                let counter = 1;
+
+                allPartsLinks.forEach ( link => {
+                    if (allPartsLinks.size > 1 ) {
+                        allLinksText = allLinksText + '<a href="' + link + '" target="_blank" >'  + 'part-' + counter  + '</a>';
+                    } else {
+                        allLinksText = allLinksText + '<a href="' + link + '" target="_blank" >'  + 'link' + '</a>';
+
+                    }
+                    allLinksText = allLinksText +'<br>'
+
+                    counter++;
+                });
+
+
+                linksTd.innerHTML = allLinksText;
+                tr.appendChild(linksTd);
+
+
+                datatable.appendChild(tr);
+
+            }
+
+            
+            );
+
+        }
+    }
+    
+
+
+    </script>
+</body>
+
+
 </html>
+
+
+
+
